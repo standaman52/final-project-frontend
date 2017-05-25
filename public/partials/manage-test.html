@@ -1,9 +1,9 @@
  <button ng-show="ctrl.divToken" ng-click="show = !show">Add Test</button>
- <button ng-show="ctrl.divToken" ng-click="edit = !edit">Edit Test</button>
- <button ng-show="ctrl.divToken" ng-click="show = !show">Delete Test</button>
+
 
 <!--Add a test  -->
 <form ng-show="show" ng-submit="ctrl.createTest()">
+  <div ng-hide="ctrl.hideDiv1">
   <label>Test Name:</label><input ng-model="ctrl.createFormData.name" type="text" name="" value="" placeholder="Test Name"><br>
 
   <label>Description</label><input  ng-model="ctrl.createFormData.description" type="text" name="" value="" placeholder="Test Description"><br>
@@ -14,22 +14,29 @@
 
   <label>End Date:</label><input  ng-model="ctrl.createFormData.enddate" type="date" name="" value=""><br>
   <input type="submit" name="" value="Save"><br>
+  </div>
 </form>
 <!-- End a test -->
 
 <!--Edit a test  -->
-<form  ng-show="edit" ng-submit="ctrl.editTest()">
-  <label>Test Name:</label><input ng-model="ctrl.createFormData.name" type="text" name="" value="" placeholder="Test Name"><br>
+<form ng-submit="ctrl.updateTest()"
+  ng-if="ctrl.editableTest != test.id" >
 
-  <label>Description</label><input  ng-model="ctrl.createFormData.description" type="text" name="" value="" placeholder="Test Description"><br>
+      <label>Test Name:</label><input ng-model="ctrl.editformdata.name" type="text" value="" placeholder="{{ctrl.specificTest.name}}"><br>
 
-  <label>Number of Questions:</label><input  ng-model="ctrl.createFormData.numberofquestion" type="number" name="" value="" placeholder="Number of Questions"><br>
+      <label>Description</label><input  ng-model="ctrl.editformdata.description" type="text" name="" value="" placeholder="{{ctrl.specificTest.description}}"><br>
 
-  <label>Start Date</label><input  ng-model="ctrl.createFormData.begindate" type="date" name="" value=""><br>
+      <label>Number of Questions:</label><input  ng-model="ctrl.editformdata.numberofquestion" type="number" name="" value="" placeholder="{{ctrl.specificTest.numberofquestion}}"><br>
 
-  <label>End Date:</label><input  ng-model="ctrl.createFormData.enddate" type="date" name="" value=""><br>
-  <input type="submit" name="" value="edit"><br>
+      <label>Start Date</label><input  ng-model="ctrl.editformdata.begindate" type="date" name="" value=""><br>
+
+      <label>End Date:</label><input  ng-model="ctrl.editformdata.enddate" type="date" name="" value=""><br>
+      <input type="submit" name="" value="edit"><br>
 
 </form>
 
 <!-- End edit test -->
+<div ng-repeat="test in ctrl.tests" class="">
+  <p ng-click="ctrl.editTest(test.id);ctrl.divToken; ctrl.getSpecificTest(test.id)" ng-hide="ctrl.hideDiv">{{test.name}}</p>
+  <div ng-if="vm.editableChild == child._id"></div>
+</div>

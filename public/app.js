@@ -6,6 +6,8 @@ this.url = 'http://localhost:3000';
 this.user = {};
 this.selected_partial = 'index';
 this.divToken = false;
+this.hideDiv = false;
+this.hideDiv = false;
 var controller = this;
 //=============================================================
 //Login Function
@@ -24,8 +26,8 @@ this.login = function(userPass){
     console.log(response);
           if (response.data.status == 401) {
           this.error = "Incorrect Username or Password, Try Again";
-          userPass.username = ""
-          userPass.password =  ""
+          userPass.username = "";
+          userPass.password =  "";
         } else {
           this.user = response.data.user;
           localStorage.setItem('token', JSON.stringify(response.data.token));
@@ -72,22 +74,75 @@ this.createTest = function(){
     }
   }).then(function(response){
     console.log(response);
-    controller.test = response.data
+    controller.tests = response.data;
     controller.createformdata = {};
-    console.log(controller.test);
-  })
-}
+    controller.hideDiv1 = true;
+    controller.getTest();
+
+    console.log(controller.test.id);
+
+  });
+};
 
 //=======================================================================
-//Edit test
-this.editTest = function(){
-  console.log("hello");
-}
+this.getTest = function(){
+  $http({
+          method: 'GET',
+          url: this.url + '/tests'
+      }).then(function(response){
+          console.log(response);
+          controller.tests = response.data;
+          console.log("===============");
+          console.log(controller.tests);
+      });
+  };
 
+this.getTest();
+//=======================================================================
+
+//get specific test
+this.getSpecificTest = function(id){
+  $http({
+          method: 'GET',
+          url: this.url + '/tests/' + id
+      }).then(function(response){
+          console.log(response);
+          controller.specificTest = response.data;
+          console.log("===============");
+          console.log(controller.specificTest);
+
+      });
+  };
+
+//======================================================================
+
+
+//Edit test
+this.updateTest = function(){
+var id  = controller.specificTest.id;
+console.log(id);
+  $http({
+          method: 'PUT',
+          url: this.url + '/tests/' + id,
+          data: this.editformdata
+      }).then(function(result){
+          console.log(result);
+          controller.editformdata = {};
+          controller.getTest()
+
+      });
+};
+
+//======================================================================
+this.editTest = function(id) {
+  console.log(id);
+  this.editableTest = id;
+  controller.hideDiv = true;
+};
 //======================================================================
 this.routeToManageTest = function(){
     $location.path('/manage/test');
-}
+};
 
 }]);
 
