@@ -1,8 +1,16 @@
 console.log("connected");
 var app = angular.module('myApp', ["ngRoute"]);
 
+
+if(window.location.origin == "http://localhost:8000") {
+  DB_URL = "http://localhost:3000";
+}
+else {
+  DB_URL = "https://online-exam-app.herokuapp.com";
+}
+
+
 app.controller('mainController',['$http','$location', function($http, $location){
-this.url = 'http://localhost:3000';
 this.user = {};
 this.selected_partial = 'index';
 this.divToken = false;
@@ -14,7 +22,7 @@ var controller = this;
 this.login = function(userPass){
   $http({
     method: 'POST',
-    url: this.url + '/users/login',
+    url: DB_URL + '/users/login',
     data: {
       user:
       {
@@ -39,7 +47,7 @@ this.login = function(userPass){
 //=======================================================================
   this.getUsers = function() {
   $http({
-    url: this.url + '/users',
+    url: DB_URL + '/users',
     method: 'GET',
     headers: {
       Authorization: 'Bearer ' + JSON.parse(localStorage.getItem('token'))
@@ -66,7 +74,7 @@ this.logout = function(){
 this.createTest = function(){
   $http({
     method: 'POST',
-    url: this.url + '/tests',
+    url: DB_URL + '/tests',
     data: this.createFormData,
     headers: {
       'Authorization': 'Bearer ' + JSON.parse(localStorage.getItem('token'))
@@ -84,7 +92,7 @@ this.createTest = function(){
 this.getTest = function(){
   $http({
           method: 'GET',
-          url: this.url + '/tests'
+          url: DB_URL + '/tests'
       }).then(function(response){
           console.log(response);
           controller.tests = response.data;
@@ -99,7 +107,7 @@ this.getTest();
 this.getSpecificTest = function(id){
   $http({
           method: 'GET',
-          url: this.url + '/tests/' + id
+          url: DB_URL + '/tests/' + id
       }).then(function(response){
           console.log(response);
           controller.specificTest = response.data;
@@ -118,7 +126,7 @@ var id  = controller.specificTest.id;
 console.log(id);
   $http({
           method: 'PUT',
-          url: this.url + '/tests/' + id,
+          url: DB_URL + '/tests/' + id,
           data: this.editformdata
       }).then(function(result){
           console.log(result);
@@ -132,7 +140,7 @@ this.deleteTest = function(id) {
   console.log(id);
 $http({
         method: 'DELETE',
-        url: this.url + '/tests/' + id,
+        url: DB_URL + '/tests/' + id,
         data: this.deletedata
       }).then(function(result){
       console.log(result);
