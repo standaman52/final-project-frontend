@@ -20,23 +20,23 @@
 
 <!--Edit a test  -->
 <form ng-submit="ctrl.updateTest()"
-  ng-if="ctrl.editableTest != test.id" >
+  ng-if="ctrl.editableTest != test.id" ng-hide="ctrl.hideDiv1">
 
-      <label>Test Name:</label><input ng-model="ctrl.editformdata.name" type="text" value="" placeholder="{{ctrl.specificTest.name}}"><br>
+      <label>Test Name:</label><input ng-model="ctrl.editformdata.name" type="text" placeholder="{{ctrl.specificTest.name}}"><br>
 
-      <label>Description</label><input  ng-model="ctrl.editformdata.description" type="text" name="" value="" placeholder="{{ctrl.specificTest.description}}"><br>
+      <label>Description</label><input  ng-model="ctrl.editformdata.description" type="text" placeholder="{{ctrl.specificTest.description}}"><br>
 
-      <label>Number of Questions:</label><input  ng-model="ctrl.editformdata.numberofquestion" type="number" name="" value="" placeholder="{{ctrl.specificTest.numberofquestion}}"><br>
+      <label>Number of Questions:</label><input  ng-model="ctrl.editformdata.numberofquestion" type="number" placeholder="{{ctrl.specificTest.numberofquestion}}"><br>
 
-      <label>Start Date</label><input  ng-model="ctrl.editformdata.begindate" type="date" name="" value=""><br>
+      <label>Start Date</label><input  ng-model="ctrl.editformdata.begindate" type="date"><br>
 
-      <label>End Date:</label><input  ng-model="ctrl.editformdata.enddate" type="date" name="" value=""><br>
+      <label>End Date:</label><input  ng-model="ctrl.editformdata.enddate" type="date"><br>
       <input type="submit" name="" value="edit"><br>
-
 </form>
 
+    <input ng-click="ctrl.deleteTest(ctrl.specificTest.id)" type="submit" name="" value="delete"><br>
 <!-- End edit test -->
-<div ng-repeat="test in ctrl.tests" class="">
-  <p ng-click="ctrl.editTest(test.id);ctrl.divToken; ctrl.getSpecificTest(test.id)" ng-hide="ctrl.hideDiv">{{test.name}}</p>
+<div ng-repeat="test in ctrl.tests" >
+  <p ng-click="ctrl.editTest(test.id);ctrl.divToken; ctrl.getSpecificTest(test.id)">{{test.name}}</p>
   <div ng-if="vm.editableChild == child._id"></div>
 </div>

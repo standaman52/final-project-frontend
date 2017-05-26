@@ -59,7 +59,6 @@ this.login = function(userPass){
 this.logout = function(){
   localStorage.clear('token');
   location.reload();
-
 };
 
 //======================================================================
@@ -76,10 +75,7 @@ this.createTest = function(){
     console.log(response);
     controller.tests = response.data;
     controller.createformdata = {};
-    controller.hideDiv1 = true;
     controller.getTest();
-
-    console.log(controller.test.id);
 
   });
 };
@@ -96,7 +92,6 @@ this.getTest = function(){
           console.log(controller.tests);
       });
   };
-
 this.getTest();
 //=======================================================================
 
@@ -128,10 +123,24 @@ console.log(id);
       }).then(function(result){
           console.log(result);
           controller.editformdata = {};
-          controller.getTest()
-
+          controller.getTest();
       });
 };
+//======================================================================
+//delete test
+this.deleteTest = function(id) {
+  console.log(id);
+$http({
+        method: 'DELETE',
+        url: this.url + '/tests/' + id,
+        data: this.deletedata
+      }).then(function(result){
+      console.log(result);
+        controller.getTest();
+          $location.path('/manage/test');
+      });
+  };
+
 
 //======================================================================
 this.editTest = function(id) {
