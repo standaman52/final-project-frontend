@@ -9,14 +9,31 @@ else {
   DB_URL = "https://online-exam-app.herokuapp.com";
 }
 
-
-app.controller('mainController',['$http','$location', function($http, $location){
+app.controller('mainController',['$http','$location','$scope', function($http, $location, $scope){
 this.user = {};
 this.selected_partial = 'index';
 this.divToken = false;
 this.hideDiv = false;
-this.hideDiv = false;
+
 var controller = this;
+//=============================================================
+//Create Account
+this.createAccount = function() {
+
+    $http({
+       method: 'POST',
+       url: DB_URL + '/users',
+       data: {
+         user: {
+          username: this.username,
+          password: this.password
+          }
+       },
+     }).then(function(response) {//sucess
+       console.log(response);
+       this.user = response.data.user;
+     }.bind(this));
+  };
 //=============================================================
 //Login Function
 this.login = function(userPass){
@@ -62,9 +79,11 @@ this.login = function(userPass){
     }
   }.bind(this));
 };
+
 //=========================================================================
 //logout
 this.logout = function(){
+  this.divToken = true;
   localStorage.clear('token');
   location.reload();
 };
@@ -119,7 +138,6 @@ this.getSpecificTest = function(id){
 
 //======================================================================
 
-
 //Edit test
 this.updateTest = function(){
 var id  = controller.specificTest.id;
@@ -156,9 +174,45 @@ this.editTest = function(id) {
   this.editableTest = id;
   controller.hideDiv = true;
 };
+
+this.createQuestion = function(id){
+testId = this.test_id.id;
+  $http({
+    method:'POST',
+    url: DB_URL + '/tests/' + testId + '/questions',
+    data: {
+      question:
+      {
+        user_id : this.user.id,
+        test_id : this.test_id.id,
+        name: this.name,
+        option1: this.option1,
+        option2: this.option2,
+        option3: this.option3,
+        option4: this.option4,
+        correctanswer: this.correctanswer,
+        score: this.score
+    },
+  },
+  }).then(function(response){
+    console.log(response);
+    controller.questions = response.data;
+  });
+};
+//===================================================================
+
 //======================================================================
 this.routeToManageTest = function(){
     $location.path('/manage/test');
+};
+
+this.routeToManageQuestion = function(){
+      $location.path('/manage/question');
+};
+
+this.routeToSignUp = function(){
+    this.divToken = true;
+    $location.path('/register');
 };
 
 }]);
@@ -170,6 +224,10 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
         templateUrl : "/partials/index-partials.html"
     }).when("/manage/test",{
       templateUrl : "/partials/manage-test.html"
+    }).when("/register",{
+        templateUrl : "/partials/register.html"
+    }).when("/manage/question",{
+      templateUrl : "/partials/manage-question.html"
     });
-    $locationProvider.html5Mode({ enabled: true, requireBase: false }); // tell angular to use push state
+    $locationProvider.html5Mode({ enabled: true, requireBase: false });
 }]);

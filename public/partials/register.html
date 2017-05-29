@@ -1,3 +1,8 @@
-<div class="">
-  
+<div>
+  <form ng-submit="ctrl.createAccount()">
+    <label>Username:</label><input ng-model="ctrl.username" type="text" placeholder="Username" required>
+    <label>Password:</label><input  ng-model="ctrl.password" type="text" placeholder="Password" required><br>
+    <input type="submit" value="Sign Up">
+  </form>
+<a href="/login">Sign In</a>
 </div>

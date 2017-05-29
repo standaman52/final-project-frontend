@@ -1,22 +1,24 @@
+  <a ng-show="ctrl.divToken" href="#" ng-click="ctrl.logout()">logout</a>
  <button ng-show="ctrl.divToken" ng-click="show = !show">Add Test</button>
 
 
 <!--Add a test  -->
 <form ng-show="show" ng-submit="ctrl.createTest()">
   <div ng-hide="ctrl.hideDiv1">
-  <label>Test Name:</label><input ng-model="ctrl.createFormData.name" type="text" name="" value="" placeholder="Test Name"><br>
+  <label>Test Name:</label><input ng-model="ctrl.createFormData.name" type="text"placeholder="Test Name"><br>
 
-  <label>Description</label><input  ng-model="ctrl.createFormData.description" type="text" name="" value="" placeholder="Test Description"><br>
+  <label>Description</label><input  ng-model="ctrl.createFormData.description" type="text"placeholder="Test Description"><br>
 
-  <label>Number of Questions:</label><input  ng-model="ctrl.createFormData.numberofquestion" type="number" name="" value="" placeholder="Number of Questions"><br>
+  <label>Number of Questions:</label><input  ng-model="ctrl.createFormData.numberofquestion" type="number" placeholder="Number of Questions"><br>
 
-  <label>Start Date</label><input  ng-model="ctrl.createFormData.begindate" type="date" name="" value=""><br>
+  <label>Start Date</label><input  ng-model="ctrl.createFormData.begindate" type="date" ><br>
 
-  <label>End Date:</label><input  ng-model="ctrl.createFormData.enddate" type="date" name="" value=""><br>
-  <input type="submit" name="" value="Save"><br>
+  <label>End Date:</label><input  ng-model="ctrl.createFormData.enddate" type="date" ><br>
+  <input type="submit" value="Save"><br>
   </div>
 </form>
 <!-- End a test -->
+
 
 <!--Edit a test  -->
 <form ng-submit="ctrl.updateTest()"

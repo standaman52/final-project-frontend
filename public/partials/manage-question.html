@@ -1,0 +1,30 @@
+  <a ng-show="ctrl.divToken" href="#" ng-click="ctrl.logout()">logout</a>
+
+<h2>Manage Question</h2>
+
+<!--Add Questions  -->
+<div>
+  <form ng-submit="ctrl.createQuestion()">
+
+    <label>Test:</label>
+    <select ng-options="test as test.name for test in ctrl.tests"
+   ng-model="ctrl.test_id"
+  ></select><br>
+
+    <label>Qestion</label><input type="text" ng-model="ctrl.name"><br>
+    <label>Option A:</label><input type="text" ng-model="ctrl.option1"><br>
+    <label>Option B:</label><input type="text" ng-model="ctrl.option2"><br>
+    <label>Option C:</label><input type="text" ng-model="ctrl.option3"><br>
+    <label>Option D:</label><input type="text" ng-model="ctrl.option4"><br>
+    <label>Answer</label>
+    <select ng-model="ctrl.correctanswer">
+      <option value="A">A</option>
+      <option value="B">B</option>
+      <option value="C">C</option>
+      <option value="D">D</option>
+    </select><br>
+    <label>Score</label><input type="number" ng-model="ctrl.score"><br>
+    <input type="Submit" value="Create Question">
+  </form>
+</div>
+<!--End Questions -->
