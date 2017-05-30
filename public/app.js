@@ -104,6 +104,7 @@ this.createTest = function(){
     controller.createformdata = {};
     controller.getTest();
 
+
   });
 };
 
@@ -150,6 +151,7 @@ console.log(id);
           console.log(result);
           controller.editformdata = {};
           controller.getTest();
+          controller.showTheForm = true;
       });
 };
 //======================================================================
@@ -174,7 +176,41 @@ this.editTest = function(id) {
   this.editableTest = id;
   controller.hideDiv = true;
 };
+this.editQuestion = function(id) {
+  console.log(id);
+  this.editableQuestion = id;
+  controller.hideDiv = true;
+};
+//===================================================================
+this.getQuestions = function(id){
+console.log(id);
+  $http({
+          method: 'GET',
+          url: DB_URL + '/tests/' + id + '/questions'
+      }).then(function(response){
+          console.log(response);
+          controller.questions = response.data;
 
+      });
+};
+this.getQuestions();
+//==================================================================
+this.getSpecificQuestion = function(id){
+
+  $http({
+          method: 'GET',
+          url: DB_URL + '/tests/' + id + '/questions/' + id
+      }).then(function(response){
+          console.log(response);
+          controller.specificQuestion = response.data;
+          console.log("===============");
+          console.log(controller.specificQuestion);
+
+
+      });
+  };
+
+//==================================================================
 this.createQuestion = function(id){
 testId = this.test_id.id;
   $http({
@@ -195,11 +231,52 @@ testId = this.test_id.id;
     },
   },
   }).then(function(response){
-    console.log(response);
     controller.questions = response.data;
+      console.log(controller.questions);
+      console.log("======================");
   });
 };
+
 //===================================================================
+//edit question
+this.updateQuestion = function(id){
+ id = this.specificQuestion.id;
+  $http({
+          method: 'PUT',
+          url: DB_URL + '/tests/' + id + '/questions/' + id,
+          data: this.editformdata
+      }).then(function(result){
+          console.log(result);
+           controller.getQuestions();
+      });
+};
+//=====================================================================
+//Delete question
+this.deleteQuestion = function(id){
+  console.log("here");
+  console.log(id);
+  $http({
+          method: 'DELETE',
+          url: DB_URL + '/tests/' + id + '/questions/' + id,
+        }).then(function(result){
+        console.log(result);
+          controller.getQuestions();
+            $location.path('/manage/question');
+        });
+};
+//======================================================================
+$scope.choices = [];
+$scope.addNewQuestion = function(numberOfQuestions){
+  console.log(numberOfQuestions);
+  var newItem = $scope.choices;
+   $scope.choices.push({newItem});
+};
+$scope.removeChoice = function() {
+    var lastItem = $scope.choices.length-1;
+    $scope.choices.splice(lastItem);
+  };
+
+
 
 //======================================================================
 this.routeToManageTest = function(){
