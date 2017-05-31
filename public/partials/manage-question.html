@@ -1,66 +1,170 @@
-<!-- <a ng-show="ctrl.divToken" href="#" ng-click="ctrl.logout()">logout</a> -->
-
-<h2>Manage Question</h2>
-<button ng-click="addNewQuestion()">Add fields</button>
-<fieldset  data-ng-repeat="choice in choices |limitTo:3">
-  <div>
-    <form ng-submit="ctrl.createQuestion()">
-
-      <label>Test:</label>
-      <select ng-change="addNewQuestion(test.numberOfQuestions)" ng-options="test as test.name for test in ctrl.tests"
-      ng-model="ctrl.test_id"
-      ></select><br>
-
-      <label>Qestion</label><input type="text" ng-model="ctrl.name"><br>
-      <label>Option A:</label><input type="text" ng-model="ctrl.option1"><br>
-      <label>Option B:</label><input type="text" ng-model="ctrl.option2"><br>
-      <label>Option C:</label><input type="text" ng-model="ctrl.option3"><br>
-      <label>Option D:</label><input type="text" ng-model="ctrl.option4"><br>
-      <label>Answer</label>
-      <select ng-model="ctrl.correctanswer">
-        <option value="A">A</option>
-        <option value="B">B</option>
-        <option value="C">C</option>
-        <option value="D">D</option>
-      </select><br>
-      <label>Score</label><input type="number" ng-model="ctrl.score"><br>
-      <input type="Submit" value="Create Question">
-    </form>
-  </div>
-
-     <button class="remove" ng-show="$last" ng-click="removeChoice()">-</button>
-</fieldset>
-<!--Add Questions  -->
-
-<!--End Questions -->
 
 
 
-<!-- Edit Questions -->
-<!-- <form ng-submit="ctrl.updateQuestion()">
-  <label>Qestion</label><input type="text" ng-model="ctrl.editformdata.name" placeholder="{{ctrl.specificQuestion.name}}"><br>
-  <label>Option A:</label><input type="text" ng-model="ctrl.editformdata.option1" placeholder="{{ctrl.specificQuestion.option1}}"><br>
-  <label>Option B:</label><input type="text" ng-model="ctrl.editformdata.option2" placeholder="{{ctrl.specificQuestion.option2}}"><br>
-  <label>Option C:</label><input type="text" ng-model="ctrl.editformdata.option3" placeholder="{{ctrl.specificQuestion.option3}}"><br>
-  <label>Option D:</label><input type="text" ng-model="ctrl.editformdata.option4"
-  placeholder="{{ctrl.specificQuestion.option4}}"><br>
-  <label>Answer</label>
-  <select ng-model="ctrl.editformdata.correctanswer">
-    <option value="A">A</option>
-    <option value="B">B</option>
-    <option value="C">C</option>
-    <option value="D">D</option>
-  </select><br>
-  <label>Score</label><input type="number" ng-model="ctrl.editformdata.score" placeholder="{{ctrl.specificQuestion.score}}"><br>
-  <input type="Submit" value="Edit Question">
+
+ <div class="col-sm-9 col-sm-offset-1">
+   <div class="panel panel-default">
+     <div class="panel-heading">
+       <h2 class="panel-title">Questions
+         <a data-toggle="modal" data-target="#addQuestions" class="btn btn-info btn-xs pull-right" ng-show="ctrl.divToken">
+            <span class="glyphicon glyphicon-plus"></span> Add
+         </a>
+       </h2>
+     </div>
+     <div class="panel-body">
+       <div class="panel panel-default" ng-repeat="question in ctrl.questions" >
+         <div class="panel-heading">
+           <a href="#">
+             <h5 data-toggle="modal" data-target="#editQuestion" ng-click="ctrl.getSpecificQuestion(question.id)" class="panel-title sport-panel">{{question.name}}
+               <small class="pull-right">{{ test.numberofquestion}} questions</small>
+             </h5>
+           </a>
+         </div>
+       </div>
+     </div>
+   </div>
+ </div>
+ <!-- <div ng-repeat="question in ctrl.questions">
+   <p ng-click="ctrl.getSpecificQuestion(question.id)">{{question.name}}</p>
+ </div> -->
+
+
+
+ </div>
+ <div class="modal fade" id="addQuestions">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close"                     data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <h3 class="modal-title">Add Questions</h3>
+          </div>
+          <div class="modal-body">
+          <div id="form">
+            <form>
+              <div class="form-group">
+              <label>Test:</label>
+              <select class="form-control" ng-options="test as test.name for test in ctrl.tests"
+              ng-model="ctrl.test_id"
+              ></select>
+              </div>
+
+              <div class="form-group">
+              <label>Qestion</label>
+              <input class="form-control" class="form-control" type="text" ng-model="ctrl.name">
+              </div>
+
+              <div class="form-group">
+              <label>Option A:</label>
+              <input  class="form-control" type="text" ng-model="ctrl.option1">
+              </div>
+
+              <div class="form-group">
+              <label>Option B:</label>
+              <input class="form-control"  type="text" ng-model="ctrl.option2">
+              </div>
+
+              <div class="form-group">
+              <label>Option C:</label>
+              <input class="form-control" type="text" ng-model="ctrl.option3">
+              </div>
+
+              <div class="form-group">
+              <label>Option D:</label>
+              <input class="form-control" type="text" ng-model="ctrl.option4">
+            </div>
+                <div class="form-group">
+              <label>Answer</label>
+              <select class="form-control" ng-model="ctrl.correctanswer">
+                <option value="A">A</option>
+                <option value="B">B</option>
+                <option value="C">C</option>
+                <option value="D">D</option>
+              </select>
+              </div>
+                <div class="form-group">
+              <label>Score</label>
+              <input  class="form-control" type="number" ng-model="ctrl.score"><br>
+              </div>
+              <div class="modal-footer">
+
+              <input data-dismiss="modal" class="btn btn-secondary" ng-click="ctrl.createQuestion()"type="Submit" value="Create Question">
+            </form>
+
+            </div>
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+<!-- End a test -->
+
+<div class="modal fade" id="editQuestion">
+     <div class="modal-dialog">
+       <div class="modal-content">
+         <div class="modal-header">
+           <button type="button" class="close"                     data-dismiss="modal" aria-label="Close">
+             <span aria-hidden="true">&times;</span>
+           </button>
+           <h3 class="modal-title">Edit</h3>
+         </div>
+         <div class="modal-body">
+         <div id="form">
+           <form>
+             <div class="form-group">
+             <label>Qestion</label>
+             <input class="form-control" type="text" ng-model="ctrl.editformdata.name" placeholder="{{ctrl.specificQuestion.name}}">
+             </div>
+
+             <div class="form-group">
+             <label>Option A:</label>
+             <input class="form-control" type="text" ng-model="ctrl.editformdata.option1" placeholder="{{ctrl.specificQuestion.option1}}">
+            </div>
+
+            <div class="form-group">
+             <label>Option B:</label>
+             <input class="form-control" type="text" ng-model="ctrl.editformdata.option2" placeholder="{{ctrl.specificQuestion.option2}}">
+             </div>
+               <div class="form-group">
+             <label>Option C:</label>
+             <input class="form-control" type="text" ng-model="ctrl.editformdata.option3" placeholder="{{ctrl.specificQuestion.option3}}">
+              </div>
+              <div class="form-group">
+             <label>Option D:</label>
+             <input class="form-control" type="text" ng-model="ctrl.editformdata.option4"
+             placeholder="{{ctrl.specificQuestion.option4}}">
+            </div>
+
+              <div class="form-group">
+             <label>Answer</label>
+             <select class="form-control"  ng-model="ctrl.editformdata.correctanswer">
+               <option value="A">A</option>
+               <option value="B">B</option>
+               <option value="C">C</option>
+               <option value="D">D</option>
+             </select>
+             </div>
+
+             <div class="form-group">
+             <label>Score</label>
+             <input  class="form-control"  type="number" ng-model="ctrl.editformdata.score" placeholder="{{ctrl.specificQuestion.score}}"><br>
+             </div>
+           </form>
+           <div class="modal-footer">
+             <input class="btn btn-secondary" data-dismiss="modal" ng-click="ctrl.updateQuestion()" type="Submit" value="Edit Question">
+
+            <input class="btn btn-secondary" id="btnColor" ng-click="ctrl.deleteQuestion(ctrl.specificQuestion.id)" type="submit" data-dismiss="modal" value="delete"><br>
+           </div>
+       </div>
+         </div>
+       </div>
+     </div>
+   </div>
+
+<!--Edit a test  -->
+
+<form ng-hide="!ctrl.hideDiv1">
+
 </form>
-<form ng-click="ctrl.deleteQuestion(ctrl.specificQuestion.id)" >
-  <input type="submit" value="Delete">
-</form>
-
-Edit Questions
-</div> -->
-
-<div ng-repeat="question in ctrl.questions">
-  <p ng-click="ctrl.getSpecificQuestion(question.id)">{{question.name}}</p>
-</div>

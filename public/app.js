@@ -15,6 +15,7 @@ this.selected_partial = 'index';
 this.divToken = false;
 this.hideDiv = false;
 
+
 var controller = this;
 //=============================================================
 //Create Account
@@ -57,6 +58,8 @@ this.login = function(userPass){
           this.user = response.data.user;
           localStorage.setItem('token', JSON.stringify(response.data.token));
           this.divToken = true;
+          this.hideLogin = true;
+          this.signup = true;
             $location.path('/');
         }
 }.bind(this));
@@ -91,6 +94,7 @@ this.logout = function(){
 //======================================================================
 //Create test
 this.createTest = function(){
+  console.log("sjs");
   $http({
     method: 'POST',
     url: DB_URL + '/tests',
@@ -234,6 +238,8 @@ testId = this.test_id.id;
     controller.questions = response.data;
       console.log(controller.questions);
       console.log("======================");
+      controller.getQuestions();
+
   });
 };
 
@@ -265,17 +271,6 @@ this.deleteQuestion = function(id){
         });
 };
 //======================================================================
-$scope.choices = [];
-$scope.addNewQuestion = function(numberOfQuestions){
-  console.log(numberOfQuestions);
-  var newItem = $scope.choices;
-   $scope.choices.push({newItem});
-};
-$scope.removeChoice = function() {
-    var lastItem = $scope.choices.length-1;
-    $scope.choices.splice(lastItem);
-  };
-
 
 
 //======================================================================
@@ -287,10 +282,6 @@ this.routeToManageQuestion = function(){
       $location.path('/manage/question');
 };
 
-this.routeToSignUp = function(){
-    this.divToken = true;
-    $location.path('/register');
-};
 
 }]);
 
@@ -301,8 +292,6 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
         templateUrl : "/partials/index-partials.html"
     }).when("/manage/test",{
       templateUrl : "/partials/manage-test.html"
-    }).when("/register",{
-        templateUrl : "/partials/register.html"
     }).when("/manage/question",{
       templateUrl : "/partials/manage-question.html"
     });

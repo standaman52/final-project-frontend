@@ -1,0 +1,30 @@
+
+.modal-dialog{
+  margin-top: 150px !important;
+}
+
+.center{
+  margin: auto;
+   width: 50%;
+   padding: 10px;
+   cursor: pointer;
+}
+.hoverBar{
+     cursor: pointer;
+}
+#addTest{
+  margin-top: -100px !important;
+}
+#editTest{
+    margin-top: -100px !important;
+}
+#btnColor{
+  background-color: red !important;
+  color: white !important;
+}
+#addQuestions{
+    margin-top: -110px !important;
+}
+#editQuestion{
+      margin-top: -110px !important;
+}
