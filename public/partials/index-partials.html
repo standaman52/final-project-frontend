@@ -26,11 +26,12 @@
         </h2>
       </div>
       <div class="panel-body">
-        <div class="panel panel-default">
+        <div class="panel panel-default" ng-repeat="test in ctrl.tests">
           <div class="panel-heading">
             <a href="#">
-              <h5 class="panel-title">
-                <small class="pull-right"></small>
+              <h5 ng-click="ctrl.getSpecificTest(test.id)" class="panel-title">{{ test.name }}
+                <small class="pull-right">{{ test.numberofquestion}} questions</small>
+                asdadssads
               </h5>
             </a>
           </div>
