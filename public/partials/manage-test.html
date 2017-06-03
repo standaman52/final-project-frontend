@@ -1,128 +1,113 @@
 
-
-
-
- <div class="col-sm-9 col-sm-offset-1">
-   <div class="panel panel-default">
-     <div class="panel-heading">
-       <h2 class="panel-title">Test
-         <a data-toggle="modal" data-target="#addTest" class="btn btn-info btn-xs pull-right" ng-show="ctrl.divToken">
-            <span class="glyphicon glyphicon-plus"></span> Add
-         </a>
-       </h2>
-     </div>
-     <div class="panel-body">
-       <div class="panel panel-default" ng-repeat="test in ctrl.tests" >
-         <div class="panel-heading">
-           <a href="#">
-             <h5 data-toggle="modal" data-target="#editTest" ng-click="ctrl.editTest(test.id);ctrl.divToken; ctrl.getSpecificTest(test.id)" class="panel-title sport-panel">{{ test.name }}
-               <small class="pull-right">{{ test.numberofquestion}} questions</small>
-             </h5>
-           </a>
-         </div>
-       </div>
-     </div>
-   </div>
- </div>
- <!-- <div ng-repeat="test in ctrl.tests" >
-   <p ng-click="ctrl.editTest(test.id);ctrl.divToken; ctrl.getSpecificTest(test.id)">{{test.name}}</p>
-
-
- </div> -->
- <div class="modal fade" id="addTest">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close"                     data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-            <h3 class="modal-title">Add Test</h3>
-          </div>
-          <div class="modal-body">
-          <div id="form">
-            <form>
-              <div class="form-group">
-              <label>Test Name:</label>
-              <input class="form-control" ng-model="ctrl.createFormData.name" type="text"placeholder="Test Name">
-              </div>
-              <div class="form-group">
-              <label>Description</label>
-              <input class="form-control"  ng-model="ctrl.createFormData.description" type="text"placeholder="Test Description">
-              </div>
-                <div class="form-group">
-              <label>Number of Questions:</label>
-              <input  class="form-control"   ng-model="ctrl.createFormData.numberofquestion" type="number" placeholder="Number of Questions">
-              </div>
-              <div class="form-group">
-              <label>Start Date</label>
-              <input  class="form-control"    ng-model="ctrl.createFormData.begindate" type="date" >
-              </div>
-              <div class="form-group">
-              <label>End Date:</label>
-              <input class="form-control" ng-model="ctrl.createFormData.enddate" type="date" >
-              </div>
-
-              <button ng-click="ctrl.createTest()" class="btn btn-primary"
-              data-dismiss="modal">Save</button>
-            </form>
-        </div>
-          </div>
+<div class="col-sm-9 col-sm-offset-1">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h2 class="panel-title">Test
+        <a data-toggle="modal" data-target="#addTest" class="btn btn-info btn-xs pull-right" ng-show="ctrl.divToken">
+          <span class="glyphicon glyphicon-plus"></span> Add
+        </a>
+      </h2>
+    </div>
+    <div class="panel-body">
+      <div class="panel panel-default" ng-repeat="test in ctrl.tests">
+        <div class="panel-heading">
+          <a href="#">
+            <h5 data-toggle="modal" data-target="#editTest" ng-click="ctrl.editTest(test.id);ctrl.divToken; ctrl.getSpecificTest(test.id)" class="panel-title sport-panel">{{ test.name }}
+              <small class="pull-right">{{ test.numberofquestion}} questions</small>
+            </h5>
+          </a>
         </div>
       </div>
     </div>
+  </div>
+</div>
+<!--=======================================================================================================================================================  -->
+<div class="modal fade" id="addTest">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close"                     data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h3 class="modal-title">Add Test</h3>
+      </div>
+      <div class="modal-body">
+        <div id="form">
+          <form>
+            <div class="form-group">
+              <label>Test Name:</label>
+              <input class="form-control" ng-model="ctrl.createFormData.name" type="text"placeholder="Test Name">
+            </div>
+            <div class="form-group">
+              <label>Description</label>
+              <input class="form-control"  ng-model="ctrl.createFormData.description" type="text"placeholder="Test Description">
+            </div>
+            <div class="form-group">
+              <label>Number of Questions:</label>
+              <input  class="form-control"   ng-model="ctrl.createFormData.numberofquestion" type="number" placeholder="Number of Questions">
+            </div>
+            <div class="form-group">
+              <label>Start Date</label>
+              <input  class="form-control"    ng-model="ctrl.createFormData.begindate" type="date" >
+            </div>
+            <div class="form-group">
+              <label>End Date:</label>
+              <input class="form-control" ng-model="ctrl.createFormData.enddate" type="date" >
+            </div>
+
+            <button ng-click="ctrl.createTest()" class="btn btn-primary"
+            data-dismiss="modal">Save</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 <!-- End a test -->
-
+<!-- ================================================================================================================================= -->
 <div class="modal fade" id="editTest">
-     <div class="modal-dialog">
-       <div class="modal-content">
-         <div class="modal-header">
-           <button type="button" class="close"                     data-dismiss="modal" aria-label="Close">
-             <span aria-hidden="true">&times;</span>
-           </button>
-           <h3 class="modal-title">Edit</h3>
-         </div>
-         <div class="modal-body">
-         <div id="form">
-           <form
-             ng-if="ctrl.editableTest != test.id" ng-hide="ctrl.hideDiv1">
-                <div class="form-group">
-                 <label>Test Name:</label>
-                 <input class="form-control" ng-model="ctrl.editformdata.name" type="text" placeholder="{{ctrl.specificTest.name}}">
-               </div>
-               <div class="form-group">
-                 <label>Description</label>
-                 <input class="form-control"  ng-model="ctrl.editformdata.description" type="text" placeholder="{{ctrl.specificTest.description}}">
-              </div>
-              <div class="form-group">
-                 <label>Number of Questions:</label>
-                 <input  class="form-control"  ng-model="ctrl.editformdata.numberofquestion" type="number" placeholder="{{ctrl.specificTest.numberofquestion}}">
-            </div>
-            <div class="form-group">
-                 <label>Start Date</label>
-                 <input class="form-control"  ng-model="ctrl.editformdata.begindate" type="date">
-            </div>
-            <div class="form-group">
-                 <label>End Date:</label>
-                 <input class="form-control" ng-model="ctrl.editformdata.enddate" type="date">
-            </div>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close"                     data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h3 class="modal-title">Edit</h3>
+      </div>
+      <div class="modal-body">
+        <div id="form">
+          <form
+          ng-if="ctrl.editableTest != test.id" ng-hide="ctrl.hideDiv1">
+          <div class="form-group">
+            <label>Test Name:</label>
+            <input class="form-control" ng-model="ctrl.editformdata.name" type="text" placeholder="{{ctrl.specificTest.name}}">
+          </div>
+          <div class="form-group">
+            <label>Description</label>
+            <input class="form-control"  ng-model="ctrl.editformdata.description" type="text" placeholder="{{ctrl.specificTest.description}}">
+          </div>
+          <div class="form-group">
+            <label>Number of Questions:</label>
+            <input  class="form-control"  ng-model="ctrl.editformdata.numberofquestion" type="number" placeholder="{{ctrl.specificTest.numberofquestion}}">
+          </div>
+          <div class="form-group">
+            <label>Start Date</label>
+            <input class="form-control"  ng-model="ctrl.editformdata.begindate" type="date">
+          </div>
+          <div class="form-group">
+            <label>End Date:</label>
+            <input class="form-control" ng-model="ctrl.editformdata.enddate" type="date">
+          </div>
 
-           </form>
-           <div class="modal-footer">
-             <input class="btn btn-secondary" data-dismiss="modal"  ng-click="ctrl.updateTest()" type="submit" name="" value="edit">
+        </form>
+        <div class="modal-footer">
+          <input class="btn btn-secondary" data-dismiss="modal"  ng-click="ctrl.updateTest()" type="submit" name="" value="edit">
 
-            <input class="btn btn-secondary" id="btnColor" ng-click="ctrl.deleteTest(ctrl.specificTest.id)" type="submit" data-dismiss="modal" value="delete"><br>
-           </div>
-       </div>
-         </div>
-       </div>
-     </div>
-   </div>
-
-<!--Edit a test  -->
-
-<form ng-hide="!ctrl.hideDiv1">
-
-</form>
-
-<!-- End edit test -->
+          <input class="btn btn-secondary" id="btnColor" ng-click="ctrl.deleteTest(ctrl.specificTest.id)" type="submit" data-dismiss="modal" value="delete"><br>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>

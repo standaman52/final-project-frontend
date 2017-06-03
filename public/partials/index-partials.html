@@ -8,7 +8,7 @@
           <h4 class="hoverBar" ng-click="ctrl.routeToManageTest();">Manage Test</h4>
         </div>
         <div>
-          <h4 class="hoverBar" ng-click="ctrl.routeToManageQuestion();">Manage Question</h4>
+          <h4 class="hoverBar" ng-click="ctrl.routeToManageQuestion();ctrl.getAllQuestions();">Manage Question</h4>
         </div>
         <div>
           <h4>Manage Score</h4>
@@ -19,6 +19,8 @@
       </div>
     </div>
   </div>
+  
+  <!-- ============================================================================================================= -->
   <div class="col-sm-9">
     <div class="panel panel-default">
       <div class="panel-heading">
@@ -29,10 +31,9 @@
         <div class="panel panel-default" ng-repeat="test in ctrl.tests">
           <div class="panel-heading">
             <a href="#">
-              <h5 ng-click="ctrl.getSpecificTest(test.id)" class="panel-title">{{ test.name }}
-                <small class="pull-right">{{ test.numberofquestion}} questions</small>
-                asdadssads
-              </h5>
+              <h3 ng-click="ctrl.getQuestions(test.id)"   class="panel-title">{{test.name}}
+                <small class="pull-right">{{test.numberofquestion}} questions</small>
+              </h3>
             </a>
           </div>
         </div>

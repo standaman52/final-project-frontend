@@ -1,4 +1,4 @@
-
+html {margin-bottom: 65px}
 .modal-dialog{
   margin-top: 150px !important;
 }
@@ -27,4 +27,10 @@
 }
 #editQuestion{
       margin-top: -110px !important;
+}
+.panel-title{
+  color: #333333;
+}
+#btnSubmitAnswer{
+  color: white;
 }
