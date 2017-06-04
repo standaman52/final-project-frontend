@@ -11,24 +11,24 @@
           <div class="panel-heading">
             <small class="pull-right">{{question.score}} point</small>
             <form>
-              <h4> {{question.name}}</h4>
+              <h4> {{question.name}}</h4><p ng-if="ctrl.showError !== ctrl.showError ">{{ctrl.answerError}}</p>
               <label>
                 <input type="radio" ng-change="checkAnswer(value, question);reloadScore()" value="A"  name="{{$index +1}}"  ng-model="value">
-                {{question.option1}}<p ng-show="ctrl.showError">{{ctrl.answerError}}</p>
+                {{question.option1}}
               </label><br>
 
               <label>
                 <input type="radio" ng-change="checkAnswer(value, question);reloadScore()" value="B"  name="{{$index +1}}" ng-model="value">
-                {{question.option2}}<p ng-show="ctrl.showError">{{ctrl.answerError}}</p>
+                {{question.option2}}
               </label><br>
 
               <label>
                 <input type="radio" ng-change="checkAnswer(value, question) ;reloadScore()" value="C"  name="{{$index +1}}" ng-model="value">
-                {{question.option3}}<p ng-show="ctrl.showError">{{ctrl.answerError}}</p>
+                {{question.option3}}
               </label><br>
               <label>
                 <input  type="radio" ng-change="checkAnswer(value, question) ;reloadScore()" value="D"  name="{{$index +1}}" ng-model="value">
-                {{question.option4}}<p ng-show="ctrl.showError">{{ctrl.answerError}}</p>
+                {{question.option4}}
               </label>
               <br>
             </form>
@@ -43,7 +43,7 @@
   <div class="panel panel-default">
     <div class="panel-heading">Score</div>
     <div class="panel-body">
-        <p ng-show="ctrl.divToken">Overall score is {{ctrl.score}}</p>
+        <p ng-show="ctrl.divToken">Overall score is {{ctrl.score}} / {{ctrl.answerkeyLength}}</p>
     </div>
   </div>
 </div>

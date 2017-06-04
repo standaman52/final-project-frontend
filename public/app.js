@@ -228,8 +228,12 @@ app.controller('mainController',['$http','$location','$scope','$route', function
       controller.specificQuestion = response.data;
       console.log("===============");
       console.log(controller.specificQuestion);
+      for (var i = 0; i < controller.specificQuestion.length; i++) {
+            console.log(controller.specificQuestion[i].numberofquestion);
+      }
     });
   };
+
 
   //==================================================================
   this.createQuestion = function(id){
@@ -307,10 +311,13 @@ app.controller('mainController',['$http','$location','$scope','$route', function
   this.score = 0;
   this.compareOptions = function(){
     for (var i = 0; i < this.currentAnswerArray.length; i++) {
+      this.answerkeyLength =  this.currentAnswerArray.length;
       if(this.currentAnswerArray[i] == this.answerKey[i]){
         console.log("correct answer");
           console.log(this.questions[i].id);
       this.score +=  this.questions[i].score;
+              this.showError = false;
+              this.answerError = "correct";
       }
       else {
         console.log("=======================");
