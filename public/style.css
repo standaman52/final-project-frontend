@@ -1,8 +1,64 @@
-html {margin-bottom: 65px}
+<style>
+@import url('https://fonts.googleapis.com/css?family=Lato');
+</style>
+
+html {margin-bottom: 65px !important; }
 .modal-dialog{
   margin-top: 150px !important;
+
+}
+.glyphicon{
+  color: white!important;
+}
+.add{
+  color: white!important;
+}
+body{
+    font-family: 'Lato', sans-serif !important;
+
+}
+.navbar{
+  background-color: #4257B2 !important;
+}
+.navbar-brand{
+  color: white !important;
+}
+.nav{
+  color: white !important;
+}
+.container a  {
+  color: white !important;
 }
 
+.container ul li.last a {
+  background-color: #3CCFCF !important;
+  color: white !important;
+  padding: 14px 25px !important;
+  text-align: center !important;
+  text-decoration: none !important;
+  display: inline-block !important;
+}
+.signup{
+  color: black !important;
+  background-color: #3CCFCF !important;
+  color: white !important;
+  padding: 14px 25px !important;
+  text-align: center !important;
+  text-decoration: none !important;
+  display: inline-block !important;
+  position:absolute;
+  top:45%;
+  left:31%;
+}
+h2{
+  font-size: 40px;
+}
+.background{
+  background-color: white  !important;
+}
+.btn{
+  background-color:  #3CCFCF !important;
+}
 .center{
   margin: auto;
    width: 50%;
@@ -33,4 +89,10 @@ html {margin-bottom: 65px}
 }
 #btnSubmitAnswer{
   color: white;
+}
+.partials-container{
+  margin-left: 15% !important;
+}
+#btnSubmitAnswer{
+  margin-bottom: 10%  !important;
 }

@@ -7,60 +7,13 @@
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular-route.min.js"></script>
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-
   <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
   <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
   <base href="/">
   <script src="app.js" type="text/javascript"></script>
   <link rel="stylesheet" href="style.css">
-  <style media="screen">
-
-
-  .navbar{
-    background-color: #4257B2 !important;
-  }
-  .navbar-brand{
-    color: white !important;
-  }
-  .nav{
-    color: white !important;
-  }
-  .container a  {
-    color: white !important;
-  }
-
-  .container ul li.last a {
-    background-color: #3CCFCF !important;
-    color: white !important;
-    padding: 14px 25px !important;
-    text-align: center !important;
-    text-decoration: none !important;
-    display: inline-block !important;
-  }
-  .signup{
-    color: black !important;
-    background-color: #3CCFCF !important;
-    color: white !important;
-    padding: 14px 25px !important;
-    text-align: center !important;
-    text-decoration: none !important;
-    display: inline-block !important;
-    position:absolute;
-    top:45%;
-    left:31%;
-  }
-  h2{
-    font-size: 40px;
-  }
-  .background{
-    background-color: white  !important;
-  }
-  .btn{
-    background-color:  #3CCFCF !important;
-  }
-  </style>
-
 </head>
 
 <body ng-controller="mainController as ctrl">
@@ -77,9 +30,9 @@
       <div class="collapse navbar-collapse navHeaderCollapse">
         <ul class ="nav navbar-nav navbar-right">
 
-          <li><a ng-show="ctrl.divToken" href="#">Welcome {{ctrl.user.username}}!</a></li>
-          <li><a  ng-hide="!ctrl.hideLogin" href="#">Search</a></li>
-          <li><a ng-show="ctrl.divToken" href="#">Profile</a></li>
+          <li><a ng-show="ctrl.divToken" href="#">Welcome {{ctrl.user.username}}</a></li>
+          <!-- <li><a  ng-hide="!ctrl.hideLogin" href="#">Search</a></li> -->
+          <li><a ng-click="ctrl.routeUpdateProfile();ctrl.getSpecificUser()" ng-show="ctrl.divToken" href="#">Profile</a></li>
 
           <li><a ng-show="ctrl.divToken" ng-hide="ctrl.hideLogin" href="">Login</a></li>
 
@@ -175,6 +128,45 @@
       </div>
     </div>
   </div>
+  <div class="modal fade" id="mymodal">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <h3 class="modal-title">Contact</h3>
+            </div>
+            <div class="modal-body">
+              <div class="">Phone: 000-0000-0000</div>
+              <div class="">Email: wdir.remote@wdir.com</div>
+              <div class="">Support: support.remote@wdir.com</div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  <div class="modal fade" id="myaboutUS">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close"  data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+              <h3 class="modal-title">About Us</h3>
+            </div>
+            <div class="modal-body">
+              <p>Quiz Prep is a management tool that allows users to take practice exams. </p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
 
 </body>
 

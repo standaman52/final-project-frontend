@@ -1,6 +1,7 @@
+<div class="partials-container">
 
 <div ng-show="ctrl.divToken" class="container pull-left">
-  <div class="col-sm-3 ">
+  <div class="col-sm-3">
     <div class="panel panel-default">
       <div class="panel-heading">Menu</div>
       <div class="panel-body">
@@ -9,12 +10,6 @@
         </div>
         <div>
           <h4 class="hoverBar" ng-click="ctrl.routeToManageQuestion();ctrl.getAllQuestions()">Manage Question</h4>
-        </div>
-        <div>
-          <h4>Manage Score</h4>
-        </div>
-        <div >
-          <h4>Manage User</h4>
         </div>
       </div>
     </div>
@@ -31,7 +26,7 @@
         <div class="panel panel-default" ng-repeat="test in ctrl.tests">
           <div class="panel-heading">
             <a href="#">
-              <h3 ng-click="ctrl.getQuestions(test.id)"   class="panel-title">{{test.name}}
+              <h3 ng-click="ctrl.getQuestions(test.id);ctrl.routeToTakeTest()"   class="panel-title">{{test.name}}
                 <small class="pull-right">{{test.numberofquestion}} questions</small>
               </h3>
             </a>
@@ -39,4 +34,6 @@
         </div>
       </div>
     </div>
+  </div>
+
   </div>

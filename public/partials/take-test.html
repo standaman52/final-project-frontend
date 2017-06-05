@@ -1,6 +1,16 @@
+<!-- <div ng-show="ctrl.divToken" class="container pull-left">
+    <div class="col-sm-3">
+  <div class="panel panel-default">
+    <div class="panel-heading">Score</div>
+    <div class="panel-body">
+        <p ng-show="ctrl.divToken">Overall score is {{ctrl.score}} / {{ctrl.answerkeyLength}}</p>
+    </div>
+  </div>
+</div>
+</div>
 
-<div class="container pull-left">
-  <div class="col-sm-9 col-sm-offset-2">
+
+  <div class="col-sm-6 pull-right col-sm-offset-3 ">
     <div class="panel panel-default"  ng-repeat="question in ctrl.questions">
       <div class="panel-heading">
         <h2 class="panel-title">{{$index + 1}})
@@ -35,15 +45,69 @@
           </div>
         </div>
       </div>
-    </div>
-    <button ng-click="ctrl.compareOptions();reloadRoute()" id="btnSubmitAnswer" class="btn btn-secondary pull-right" ng-show="ctrl.divToken">Submit</button>
+
+    <button ng-click="ctrl.compareOptions();reloadRoute()" id="btnSubmitAnswer" class="btn btn-secondary" ng-show="ctrl.divToken">Submit</button>
   </div>
-</div>
-<div ng-show="ctrl.divToken" class="col-xs-2 pull-right">
-  <div class="panel panel-default">
-    <div class="panel-heading">Score</div>
-    <div class="panel-body">
-        <p ng-show="ctrl.divToken">Overall score is {{ctrl.score}} / {{ctrl.answerkeyLength}}</p>
+</div> -->
+
+<div class="partials-container">
+
+<div ng-show="ctrl.divToken" class="container pull-left">
+  <div class="col-sm-3">
+    <div class="panel panel-default">
+      <div class="panel-heading">Score</div>
+      <div class="panel-body">
+        <div>
+            <p ng-show="ctrl.divScore">Overall score is {{ctrl.score}} / {{ctrl.answerkeyLength}}</p>
+        </div>
+
+      </div>
     </div>
   </div>
+
+
+  <div class="col-sm-9">
+    <div class="panel panel-default"  ng-repeat="question in ctrl.questions">
+      <div class="panel-heading">
+        <h2 class="panel-title">{{$index + 1}})
+        </h2>
+      </div>
+      <div class="panel-body">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <small class="pull-right">{{question.score}} point</small>
+            <form>
+              <h4> {{question.name}}</h4><p ng-if="ctrl.showError !== ctrl.showError ">{{ctrl.answerError}}</p>
+              <label>
+                <input type="radio" ng-change="checkAnswer(value, question);reloadScore()" value="A"  name="{{$index +1}}"  ng-model="value">
+                {{question.option1}}
+              </label><br>
+
+              <label>
+                <input type="radio" ng-change="checkAnswer(value, question);reloadScore()" value="B"  name="{{$index +1}}" ng-model="value">
+                {{question.option2}}
+              </label><br>
+
+              <label>
+                <input type="radio" ng-change="checkAnswer(value, question) ;reloadScore()" value="C"  name="{{$index +1}}" ng-model="value">
+                {{question.option3}}
+              </label><br>
+              <label>
+                <input  type="radio" ng-change="checkAnswer(value, question) ;reloadScore()" value="D"  name="{{$index +1}}" ng-model="value">
+                {{question.option4}}
+              </label>
+              <br>
+            </form>
+          </div>
+        </div>
+      </div>
+
 </div>
+
+
+</div>
+        <button ng-click="ctrl.compareOptions();reloadRoute()" id="btnSubmitAnswer" class="btn btn-secondary pull-right" ng-show="ctrl.divToken">Submit</button>
+  <!-- ============================================================================================================= -->
+  </div>
+
+  </div>

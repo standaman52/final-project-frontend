@@ -14,6 +14,7 @@ app.controller('mainController',['$http','$location','$scope','$route', function
   this.selected_partial = 'index';
   this.divToken = false;
   this.hideDiv = false;
+  this.divScore = false;
 
 
   var controller = this;
@@ -34,6 +35,28 @@ app.controller('mainController',['$http','$location','$scope','$route', function
       this.user = response.data.user;
     }.bind(this));
   };
+  //=============================================================
+  this.updateUser = function(){
+        id = this.user.id;
+    console.log("update user");
+    $http({
+      method: 'PUT',
+      url: DB_URL + '/users/' + id,
+      data: {
+        user: {
+          username: this.username,
+          password: this.password
+        }
+      },
+    }).then(function(result){
+      console.log(result);
+      controller.username = {};
+      controller.password = {};
+      controller.getSpecificUser();
+        $location.path('/');
+    });
+  };
+
   //=============================================================
   //Login Function
   this.login = function(userPass){
@@ -78,7 +101,23 @@ app.controller('mainController',['$http','$location','$scope','$route', function
       } else {
 
         this.users = response.data;
+        console.log(this.users);
       }
+    }.bind(this));
+  };
+  this.getSpecificUser = function() {
+    id = this.user.id;
+    console.log(id);
+    $http({
+      url: DB_URL + '/users/' + id,
+      method: 'GET',
+      headers: {
+        Authorization: 'Bearer ' + JSON.parse(localStorage.getItem('token'))
+      }
+    }).then(function(response) {
+      this.specificUser = response.data;
+      console.log();
+
     }.bind(this));
   };
 
@@ -93,7 +132,7 @@ app.controller('mainController',['$http','$location','$scope','$route', function
   //======================================================================
   //Create test
   this.createTest = function(){
-    console.log("sjs");
+
     $http({
       method: 'POST',
       url: DB_URL + '/tests',
@@ -202,7 +241,6 @@ app.controller('mainController',['$http','$location','$scope','$route', function
       for (var i = 0; i < controller.questions.length; i++) {
         controller.answerKey.push(controller.questions[i].correctanswer);
       }
-      $location.path('/test');
     });
   };
   this.getQuestions();
@@ -259,7 +297,7 @@ app.controller('mainController',['$http','$location','$scope','$route', function
       controller.questions = response.data;
       console.log(controller.questions);
       console.log("======================");
-      controller.getQuestions();
+      controller.getAllQuestions();
 
     });
   };
@@ -274,7 +312,7 @@ app.controller('mainController',['$http','$location','$scope','$route', function
       data: this.editformdata
     }).then(function(result){
       console.log(result);
-      controller.getQuestions();
+      controller.getAllQuestions();
     });
   };
   //=====================================================================
@@ -287,7 +325,7 @@ app.controller('mainController',['$http','$location','$scope','$route', function
       url: DB_URL + '/tests/' + id + '/questions/' + id,
     }).then(function(result){
       console.log(result);
-      controller.getQuestions();
+      controller.getAllQuestions();
       $location.path('/manage/question');
     });
   };
@@ -296,6 +334,7 @@ app.controller('mainController',['$http','$location','$scope','$route', function
   this.currentAnswerArray =[];
 
   $scope.checkAnswer = function(answer, question){
+
     var controller = this;
     for (var i = 0; i <  controller.questions.length ; i++) {
       if(question.id == controller.questions[i].id){
@@ -310,6 +349,7 @@ app.controller('mainController',['$http','$location','$scope','$route', function
 //================================================================================
   this.score = 0;
   this.compareOptions = function(){
+    controller.divScore = true;
     for (var i = 0; i < this.currentAnswerArray.length; i++) {
       this.answerkeyLength =  this.currentAnswerArray.length;
       if(this.currentAnswerArray[i] == this.answerKey[i]){
@@ -326,13 +366,11 @@ app.controller('mainController',['$http','$location','$scope','$route', function
         this.showError = true;
         this.answerError = "wrong";
       }
-      // console.log(this.score);
     }
   };
 //==========================================================================
   $scope.reloadRoute = function() {
    $route.reload();
-
 };
 //=========================================================================
   $scope.reloadScore = function() {
@@ -347,6 +385,16 @@ app.controller('mainController',['$http','$location','$scope','$route', function
   this.routeToManageQuestion = function(){
     $location.path('/manage/question');
   };
+  this.routeUpdateProfile = function(){
+    console.log("clicked");
+  $location.path('/update/profile');
+};
+  this.routeToTakeTest = function(){
+    console.log("clicked");
+      controller.divScore = false;
+  $location.path('/test');
+};
+
 }]);
 
 //=====================================================================
@@ -360,6 +408,8 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
     templateUrl : "/partials/manage-question.html"
   }).when("/test",{
     templateUrl : "/partials/take-test.html"
+  }).when("/update/profile",{
+    templateUrl:"/partials/update-profile.html"
   });
   $locationProvider.html5Mode({ enabled: true, requireBase: false });
 }]);
